@@ -289,31 +289,23 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 .slide.is-in > *:nth-child(5) { animation-delay: .38s; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
-/* ---------- GIF ----------------------------------------------------------- */
+/* ---------- GIF -------------------------------------------------------
+   Tanpa bingkai/kartu: GIF menyatu transparan dengan latar halaman.
+   Filter drop-shadow (bukan box-shadow) mengikuti siluet gambar, bukan
+   kotaknya, jadi tetap ada kedalaman tanpa terlihat "dikotakin". ------- */
 .gif {
   position: relative;
   width: min(250px, 66vw);
   aspect-ratio: 1 / 1;
   margin: 0 0 22px;
-  border-radius: 28px;
-  padding: 6px;
-  background: linear-gradient(145deg, #ffffff, #ffe3ee);
-  box-shadow:
-    0 18px 34px -14px rgba(217, 58, 114, .42),
-    0 0 0 1px rgba(255, 179, 203, .55);
 }
 .gif img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 22px;
-  background: #fff;
+  background: transparent;
+  filter: drop-shadow(0 14px 22px rgba(176, 35, 88, .28));
 }
-/* GIF dengan latar hitam: penuhi bingkai supaya tidak ada kotak putih */
-.gif--dark { background: linear-gradient(145deg, #2a1a24, #4a2a3c); }
-.gif--dark img { background: #000; object-fit: cover; }
-/* GIF latar krem */
-.gif--cream img { background: #f7ece3; }
 
 /* ---------- Foto ---------------------------------------------------------- */
 .photos {
@@ -644,26 +636,26 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 
   var SLIDES = [
     {
-      type: "gif", src: IMG + "gif1.gif", tone: "cream",
+      type: "gif", src: IMG + "gif1.gif",
       title: 'HAPPYY BIRTHDAYY <em>GANTENGKUU</em> SAYANGG!!',
       kaomoji: "૮ ˆ ˕ ˆ ა",
       text: "there’s more waiting... click to find out ✨",
       button: "tap <3"
     },
     {
-      type: "gif", src: IMG + "gif2.gif", tone: "dark",
+      type: "gif", src: IMG + "gif2.gif",
       text: "sayangg udah berusaha lebih baik untuk setiap tahunnya yaa.<br>sayangkuu kerenn cekaliee, happy birthday sayanggg",
       lead: true,
       button: "open it <3"
     },
     {
-      type: "gif", src: IMG + "gif3.gif", tone: "white",
+      type: "gif", src: IMG + "gif3.gif",
       text: "makin tambah umur makin gantengg aja nii pacarkuuuu, nda adil ihh",
       lead: true,
       button: "<3"
     },
     {
-      type: "gif", src: IMG + "gif4.gif", tone: "cream",
+      type: "gif", src: IMG + "gif4.gif",
       text: "okii inii terakhir gantengkuu, aku buatin sesuatuu untuk birthday nyaa sayangg,<br>dibaca pelan pelan aja yaa sayangkuu 🎂",
       lead: true,
       button: "okaay <3"
@@ -791,7 +783,7 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
     var h = "";
 
     if (s.type === "gif") {
-      h += '<figure class="gif gif--' + s.tone + '"><img src="' + s.src + '" alt="" decoding="async"></figure>';
+      h += '<figure class="gif"><img src="' + s.src + '" alt="" decoding="async"></figure>';
       if (s.title)   h += '<h1 class="title">' + s.title + "</h1>";
       if (s.kaomoji) h += '<p class="kaomoji">' + esc(s.kaomoji) + "</p>";
       if (s.text)    h += '<p class="text' + (s.lead ? " text--lead" : "") + '">' + s.text + "</p>";
